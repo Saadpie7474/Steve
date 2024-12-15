@@ -83,6 +83,10 @@
         .input-container button:hover {
             background-color: #3A3D42;
         }
+        .bot-label {
+            font-weight: bold;
+            color: #5C6BC0;
+        }
     </style>
 </head>
 <body>
@@ -100,7 +104,7 @@
         function botResponse(userMessage) {
             let botMessage = "I'm not sure what you mean!";
             
-            // Additional responses based on user input
+            // Add more responses based on user input
             if (userMessage.toLowerCase().includes("hello")) {
                 botMessage = "Hello! How can I help you today?";
             } else if (userMessage.toLowerCase().includes("how are you")) {
@@ -114,9 +118,17 @@
             } else if (userMessage.toLowerCase().includes("weather")) {
                 botMessage = "The weather today is sunny with a high of 25°C.";
             } else if (userMessage.toLowerCase().includes("name")) {
-                botMessage = "I am your friendly chatbot, here to assist you!";
+                botMessage = "I am Steve, your friendly chatbot!";
             } else if (userMessage.toLowerCase().includes("help")) {
                 botMessage = "Sure, how can I assist you today?";
+            } else if (userMessage.toLowerCase().includes("favorite color")) {
+                botMessage = "I love the color blue!";
+            } else if (userMessage.toLowerCase().includes("what's your purpose")) {
+                botMessage = "My purpose is to help you with anything you need!";
+            } else if (userMessage.toLowerCase().includes("tell me a story")) {
+                botMessage = "Once upon a time, in a faraway land, a curious traveler discovered a hidden valley full of wonder...";
+            } else if (userMessage.toLowerCase().includes("are you real")) {
+                botMessage = "I am as real as a chatbot can be!";
             }
             
             return botMessage;
@@ -139,10 +151,20 @@
             // Get bot response
             let botMessage = botResponse(userInput);
 
-            // Display bot message
+            // Display bot message with label "Steve"
             let botMessageDiv = document.createElement("div");
             botMessageDiv.classList.add("message", "bot");
-            botMessageDiv.textContent = botMessage;
+            
+            let botLabel = document.createElement("span");
+            botLabel.classList.add("bot-label");
+            botLabel.textContent = "Steve: ";
+            
+            let botText = document.createElement("span");
+            botText.textContent = botMessage;
+            
+            botMessageDiv.appendChild(botLabel);
+            botMessageDiv.appendChild(botText);
+            
             document.getElementById("chat-box").appendChild(botMessageDiv);
 
             // Scroll to bottom

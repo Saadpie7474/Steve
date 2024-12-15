@@ -100,12 +100,23 @@
         function botResponse(userMessage) {
             let botMessage = "I'm not sure what you mean!";
             
+            // Additional responses based on user input
             if (userMessage.toLowerCase().includes("hello")) {
                 botMessage = "Hello! How can I help you today?";
             } else if (userMessage.toLowerCase().includes("how are you")) {
                 botMessage = "I'm doing great, thank you!";
             } else if (userMessage.toLowerCase().includes("bye")) {
                 botMessage = "Goodbye! Have a great day!";
+            } else if (userMessage.toLowerCase().includes("joke")) {
+                botMessage = "Why don't skeletons fight each other? They don't have the guts!";
+            } else if (userMessage.toLowerCase().includes("thank you")) {
+                botMessage = "You're welcome! Happy to help.";
+            } else if (userMessage.toLowerCase().includes("weather")) {
+                botMessage = "The weather today is sunny with a high of 25°C.";
+            } else if (userMessage.toLowerCase().includes("name")) {
+                botMessage = "I am your friendly chatbot, here to assist you!";
+            } else if (userMessage.toLowerCase().includes("help")) {
+                botMessage = "Sure, how can I assist you today?";
             }
             
             return botMessage;

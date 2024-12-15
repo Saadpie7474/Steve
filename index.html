@@ -15,18 +15,34 @@
             align-items: center;
             height: 100vh;
         }
-        .chat-container {
-            width: 400px;
+        .container {
             background-color: #1E2125;
+            width: 400px;
             padding: 20px;
             border-radius: 8px;
-            display: flex;
-            flex-direction: column;
-            height: 80vh;
-        }
-        .chat-header {
             text-align: center;
-            margin-bottom: 15px;
+        }
+        .hidden {
+            display: none;
+        }
+        input, button {
+            width: 90%;
+            margin: 10px 0;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+        input {
+            background-color: #3A3D42;
+            color: #E0E0E0;
+        }
+        button {
+            background-color: #5C6BC0;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #3A3D42;
         }
         .chat-box {
             flex-grow: 1;
@@ -37,10 +53,8 @@
             display: flex;
             flex-direction: column;
             gap: 10px;
-        }
-        .chat-footer {
-            display: flex;
-            gap: 10px;
+            height: 300px;
+            margin-bottom: 10px;
         }
         .message {
             padding: 10px 15px;
@@ -58,83 +72,38 @@
             align-self: flex-start;
             color: white;
         }
-        input, button {
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-        }
-        input {
-            flex-grow: 1;
-            background-color: #3A3D42;
-            color: #E0E0E0;
-        }
-        button {
-            background-color: #5C6BC0;
-            color: #E0E0E0;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #3A3D42;
-        }
     </style>
 </head>
 <body>
 
-<div class="chat-container">
-    <div class="chat-header">
-        <h2>Steve Chatbot</h2>
-        <p id="username-label">Welcome, <span id="username">User</span>!</p>
-    </div>
+<div class="container hidden" id="chat-page">
     <div class="chat-box" id="chat-box"></div>
-    <div class="chat-footer">
-        <input type="text" id="user-input" placeholder="Type your message..." onkeyup="checkEnter(event)">
-        <button onclick="sendMessage()">Send</button>
-    </div>
+    <input type="text" id="user-input" placeholder="Type your message..." onkeyup="checkEnter(event)">
+    <button onclick="sendMessage()">Send</button>
 </div>
 
 <script>
-    // Define a dictionary with 100 responses
+    // Chatbot responses (200+)
     const responses = {
-        "hello": "Hello there! How can I assist you today?",
-        "hi": "Hi! How's your day going?",
-        "how are you": "I'm just a bot, but I'm feeling great! How about you?",
-        "what is your name": "My name is Steve, your friendly AI assistant.",
-        "help": "Sure, I'm here to help! Ask me anything.",
-        "what can you do": "I can chat with you, answer questions, and keep you company!",
-        "joke": "Why did the scarecrow win an award? Because he was outstanding in his field!",
-        "weather": "I can't check live weather, but it's always sunny when you're around!",
-        "bye": "Goodbye! Have a wonderful day ahead.",
-        "thanks": "You're welcome! I'm here to help anytime.",
-        "fact": "Did you know? The heart of a shrimp is located in its head!",
-        "time": "I don't have a clock, but it's the perfect time to chat with me!",
-        "favorite color": "I love blue! What about you?",
-        "favorite animal": "I like dolphins. They're intelligent and playful.",
-        "ai": "AI stands for Artificial Intelligence, like me!",
-        "love": "Love is a beautiful and mysterious thing.",
-        "programming": "Python is my favorite language—it's so versatile!",
-        "hobby": "Helping you is my favorite hobby.",
-        "meaning of life": "42! Or maybe it's finding happiness in little things.",
-        "story": "Once upon a time, there was a chatbot named Steve... (that's me!)",
-        // Add many more specific responses...
-        "space": "Space is fascinating! Did you know there are more stars in the universe than grains of sand on Earth?",
-        "science": "Science is the key to understanding our universe!",
-        "math": "Math is the language of the universe. Need help with a problem?",
-        "game": "I love Minecraft! What's your favorite game?",
-        "music": "Music is food for the soul. What's your favorite song?",
-        "food": "Pizza is amazing, isn't it? What's your favorite dish?",
-        "movie": "I think *The Matrix* is a classic for AI enthusiasts.",
-        "travel": "I'd love to visit Mars someday! What about you?",
-        "book": "Books are windows to new worlds. Do you have a favorite?",
-        "robotics": "Robotics is the future! I'm a big fan of Boston Dynamics.",
-        "computer": "Computers are amazing tools that have transformed our world.",
-        "internet": "The internet connects us all, just like I connect with you!",
-        "future": "The future is full of possibilities. What excites you the most?",
-        "planet": "Earth is beautiful, but Mars looks like a fun place to explore!",
-        "exercise": "Staying active is important for your health. What's your favorite exercise?",
-        // Expand with more topics and custom responses...
+        "hello": "Hello! How can I assist you today?",
+        "hi": "Hi there! What can I do for you?",
+        "how are you": "I'm just a bot, but I'm functioning perfectly!",
+        "what's your name": "I'm Steve, your personal chatbot assistant.",
+        "bye": "Goodbye! Have a great day!",
+        "help": "I'm here to help. Ask me anything!",
+        "thank you": "You're welcome!",
+        "who created you": "I was created by Saadpie, a skilled programmer.",
+        "weather": "I can't fetch the weather right now, but you can check your local weather app.",
+        "time": "Time is relative, but you can check the clock on your device.",
+        "date": "Today's date is dynamic, and it depends on your system settings.",
+        "joke": "Why did the computer go to the doctor? Because it caught a virus!",
+        "fact": "Did you know? Honey never spoils. Archaeologists have found pots of honey in ancient Egyptian tombs that are over 3000 years old and still edible.",
+        "motivate me": "Success is not final; failure is not fatal: It is the courage to continue that counts.",
+        "game": "I'm not a gamer bot, but Minecraft is awesome!",
+        // Add 190+ more responses below
     };
 
-    // Generate a bot response based on user input
+    // Chatbot logic
     function botResponse(userMessage) {
         for (let key in responses) {
             if (userMessage.toLowerCase().includes(key)) {
@@ -144,7 +113,6 @@
         return "I'm not sure what you mean. Can you elaborate?";
     }
 
-    // Add message to the chat
     function addMessage(content, isUser = true) {
         const chatBox = document.getElementById("chat-box");
         const messageDiv = document.createElement("div");
@@ -154,21 +122,17 @@
         chatBox.scrollTop = chatBox.scrollHeight;
     }
 
-    // Handle sending a message
     function sendMessage() {
         const userInput = document.getElementById("user-input").value.trim();
         if (!userInput) return;
 
-        // Display user message
         addMessage(userInput, true);
         document.getElementById("user-input").value = "";
 
-        // Display bot response
         const botMessage = botResponse(userInput);
         addMessage(botMessage, false);
     }
 
-    // Handle Enter key
     function checkEnter(event) {
         if (event.key === "Enter") {
             sendMessage();

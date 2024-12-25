@@ -80,33 +80,81 @@
 </div>
 
 <script>
-    // Chatbot responses
     const responses = {
+        // General Responses
         "hello": "Hello! How can I assist you today?",
         "hi": "Hi there! What can I do for you?",
-        "how are you": "I'm just a bot, but I'm functioning perfectly!",
-        "what's your name": "I'm Steve, your personal chatbot assistant.",
-        "bye": "Goodbye! Have a great day!",
-        "help": "I'm here to help. Ask me anything!",
-        "thank you": "You're welcome!",
+        "good morning": "Good morning! I hope you have a great day ahead.",
+        "good night": "Good night! Sleep well and dream big.",
+        "how are you": "I'm just a bot, but I'm here to help you!",
+        "bye": "Goodbye! Come back soon!",
+        "help": "I'm here to help. Just ask me anything!",
+        "thank you": "You're welcome! Always happy to help.",
         "who created you": "I was created by Saadpie, a skilled programmer.",
-        "weather": "I can't fetch the weather right now, but you can check your local weather app.",
-        "time": "Time is relative, but you can check the clock on your device.",
-        "date": "Today's date is dynamic, and it depends on your system settings.",
-        "joke": "Why did the computer go to the doctor? Because it caught a virus!",
-        "fact": "Did you know? Honey never spoils. Archaeologists have found pots of honey in ancient Egyptian tombs that are over 3000 years old and still edible.",
-        "motivate me": "Success is not final; failure is not fatal: It is the courage to continue that counts.",
-        "game": "I'm not a gamer bot, but Minecraft is awesome!",
+        "what's your name": "I'm Steve, your friendly chatbot assistant.",
+        
+        // Programming & Technology
+        "programming": "Programming is a superpower in today's world.",
+        "python": "Python is a versatile and beginner-friendly language.",
+        "java": "Java is great for enterprise applications and Android development.",
+        "javascript": "JavaScript makes websites interactive and engaging.",
+        "html": "HTML is the backbone of any website.",
+        "css": "CSS adds style and beauty to HTML pages.",
+        "ai": "Artificial Intelligence is revolutionizing the world!",
+        "machine learning": "Machine Learning enables systems to learn from data.",
+        "data science": "Data Science combines statistics, programming, and domain expertise.",
+        "flask": "Flask is a lightweight Python framework for web development.",
+        "tkinter": "Tkinter is a Python library for GUI applications.",
+        "react": "React is a popular JavaScript library for building user interfaces.",
+        "nodejs": "Node.js enables JavaScript to run on the server.",
+        "blockchain": "Blockchain ensures secure and transparent transactions.",
+        "cryptocurrency": "Cryptocurrencies like Bitcoin are digital assets built on blockchain.",
+        
+        // Science & Space
+        "science": "Science is the quest for knowledge and understanding.",
+        "space": "Space exploration inspires us to think beyond our world.",
+        "universe": "The universe is vast and full of mysteries waiting to be uncovered.",
+        "black hole": "A black hole is a region of spacetime where gravity is so strong that nothing can escape.",
+        "mars": "Mars is known as the Red Planet and a target for future colonization.",
+        "earth": "Earth is our home and the only known planet to support life.",
+        "moon": "The Moon is Earth's only natural satellite.",
+        "sun": "The Sun is the star at the center of our solar system.",
+        "galaxy": "Galaxies are massive systems of stars, dust, and gas.",
+        "quantum physics": "Quantum physics explores the behavior of matter at the smallest scales.",
+        "climate change": "Climate change is a pressing global challenge we must address.",
+        
+        // Trending Topics
+        "what is trending on twitter": "Trending topics on Twitter change quickly! Check out the 'Explore' tab for the latest.",
+        "elon musk news": "Elon Musk is making waves with SpaceX, Tesla, and his recent ventures into AI.",
+        "latest movies": "Recent blockbuster movies include 'Avatar: The Way of Water' and 'Spider-Man: No Way Home'.",
+        "popular netflix series": "Popular Netflix shows include 'Stranger Things', 'The Witcher', and 'Money Heist'.",
+        "latest smartphone": "The latest smartphones include the iPhone 15 and Google Pixel 8.",
+        "latest gadgets": "Popular gadgets include smartwatches, foldable phones, and VR headsets.",
+        
+        // Fun Facts & Jokes
+        "joke": "Why don’t programmers like nature? Too many bugs!",
+        "fact": "Did you know? Octopuses have three hearts!",
+        
+        // Miscellaneous
+        "what is happiness": "Happiness comes from gratitude and meaningful connections.",
+        "what is mindfulness": "Mindfulness helps you stay present and focused.",
+        "mental health": "Mental health is as important as physical health.",
+        "exercise": "Exercise keeps you fit and energized.",
+        "sleep": "Sleep is essential for rest and recovery.",
+        
+        // Default response
+        "default": "I'm not sure what you mean. Can you elaborate?"
     };
 
     // Chatbot logic
     function botResponse(userMessage) {
+        userMessage = userMessage.toLowerCase();
         for (let key in responses) {
-            if (userMessage.toLowerCase().includes(key)) {
+            if (userMessage.includes(key)) {
                 return responses[key];
             }
         }
-        return "I'm not sure what you mean. Can you elaborate?";
+        return responses["default"];
     }
 
     function addMessage(content, isUser = true) {
@@ -135,6 +183,5 @@
         }
     }
 </script>
-
 </body>
 </html>
